@@ -1,0 +1,19 @@
+{
+  "name": "jspoo",
+  "version": "1.0.0",
+  "description": "Notas sobre el curso de Programacion Orientada a Objetos en JavaScript",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "JavaScript",
+    "POO",
+    "Programación",
+    "Orientada",
+    "a",
+    "Objetos"
+  ],
+  "author": "Jorge Arias Argüelles",
+  "license": "MIT"
+}
