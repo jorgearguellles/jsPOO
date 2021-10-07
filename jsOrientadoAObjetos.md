@@ -21,6 +21,13 @@ Los tres paradigmas más populares son:
 
  Es una forma de abordar los problemas abstrayendo los elementos en forma de objetos.
 
+ **Conceptos:**
+- **Clase:** Representación de métodos y atributos que representan a una entidad.
+- **Objeto:** Instancia de una clase.
+- **Herencia:** Crear nuevas clases con características similares a partir de otras.
+- **Encapsulamiento:** Esconder datos que solo pueden ser accedidos por la clase.
+- **Polimorfismo:** Un objeto puede comportarse de muchas formas, ejemplo: En herencia, las clases hijas pueden comportarse como su clase padre y viceversa.
+
 ## ¿Qué problemas busca solucionar el Paradgima de la POO?
 
 El Paradgima de la POO busca resolver los siguientes problemas:
@@ -53,7 +60,7 @@ Los Objetos literales son diferentes a las Instancias de Clases.
     this.points = 740
   }
 
-  const juanica = new Student();
+  const juanita = new Student();
   ```
   No estamos creando una Clase, sino, que estamos creando una Función(Prototipo) y lo interesante de esta función son dos cosas:
   1. Estamos usando la palabra reservada **`this`** para guardar los atributos.
@@ -62,3 +69,32 @@ Los Objetos literales son diferentes a las Instancias de Clases.
 En JavaScript todo es un Objeto
 
 <img src="./img/object.png">
+
+
+### ¿Qué es “this” (este)?
+
+Es posible que hayas notado algo un poco extraño en nuestros métodos. Mira esto, por ejemplo:
+```js
+saludo: function() {
+  alert('¡Hola!, Soy '+ this.nombre.pila + '.');
+}
+```
+ La palabra clave this se refiere al objeto actual en el que se está escribiendo el código, por lo que en este caso this es equivalente a la persona. Entonces, ¿por qué no escribir persona en su lugar? Como verás en el artículo JavaScript orientado a objetos para principiantes cuando comenzaremos a crear constructores, etc., this es muy útil: siempre asegurará que se usen los valores correctos cuando cambie el contexto de un miembro (por ejemplo, dos diferentes instancias de objetos persona) pueden tener diferentes nombres, pero querráx usar su propio nombre al decir su saludo).
+Vamos a ilustrar lo que queremos decir con un par de objetos persona simplificados:
+
+```js
+var persona1 = {
+  nombre: 'Chris',
+  saludo: function() {
+    alert('¡Hola!, Soy '+ this.nombre + '.');
+  }
+}
+
+var persona2 = {
+  nombre: 'Brian',
+  saludo: function() {
+    alert('¡Hola!, Soy '+ this.nombre + '.');
+  }
+}
+```
+
