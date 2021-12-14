@@ -1,89 +1,135 @@
-/* ==========================================================================
- * Clase: Objetos literales vs Prototipos en JS
- * ==========================================================================
- */ 
-
-// Primer objeto literal -> const natalia = {...};
-const natalia = {
-  name: "Natalia",
-  age: 20,
-  cursosAprobados: [
-    "Curso definitivo de HTML y CSS",
-    "Curso de POO"
-  ],
-  //Para crar métodos en POO teemos dos obciones...
-  //1 obción:
-  // aprobarCurso: function(){
-
-  // },
-  //2 obción:
-  aprobarCurso1(nuevoCurso){
-    this.cursosAprobados.push(nuevoCurso);
-  },
-
-};
-
-// Natalia apruebe otro curso
-// console.log("Antes:",natalia);
-// natalia.cursosAprobados.push("Curso de Responsive Design");
-// console.log(natalia);
-// natalia.aprobarCurso1("Curso de Frontend Developer");
-// console.log("Despues:",natalia);
-
-// Nuestro Primer Prototipo -> 
-
-function Student(name, age, cursosAprobados1){
-  this.name = name,
-  this.age = age,
-  this.cursosAprobados1  = cursosAprobados1
-  // Obción uno para crear métodos al interior de los prototipos:
-  // this.aprobarCurso2 = function(nuevoCurso){
-  //   this.cursosAprobados1.push(nuevoCurso);
-  // }
-  // Obción dos para crear métodos al interior de los prototipos: Por fuera de la función...
-};
-
-Student.prototype.cursosAprobados2 = function(nuevoCurso){
-  this.cursosAprobados1.push(nuevoCurso);
-};
-
-// Creemos una instacia de nuestro primer portotipo
-
-const juanita = new Student(
-  "Juanita Alejandra",
-  15,
-  ["Curso Introducción a los Video juegos", "Curso de Creación de personaje"],
-);
-
-
-/* ==========================================================================
- * Clase: Clases en JS - Prototipos con la sintaxis de clase
- * ==========================================================================
- */
-
-
-class Student2{
-
-  constructor(name, age, cursosAprobados1){
-    this.name2 = name,
-    this.age2 = age,
-    this.cursosAprobados2  = cursosAprobados1
-  }
-
-  aprobarCurso2(curso2){
-    this.cursosAprobados2.push(curso2);
+class Classes {
+  constructor({
+    name,
+  }){
+    this.name = name;
   }
 }
 
-const miguelito = new Student2(
-  "Miguel",
-  28,
-  [
-    "Curso de analisis de negocios para ciencia de datos",
-    "Principio de Data Viz para Businees admin"
-  ]
-)
+class Course {
+  constructor({
+    name,
+    classes = [],
+    coments = [],
+  }){
+    this.name = name;
+    this.classes = classes;
+    this.coments = coments;
+  }
+}
 
-console.log(miguelito);
-miguelito.aprobarCurso2("Curso de cocina");
-console.log(miguelito);
+const cursoProgBasica = new Course({
+  name: "Curso gratis de Programación Básica",
+});
+const cursoDefHTMLCSS = new Course({
+  name: "Curso Definitivo de HTML & CSS",
+});
+const cursoPracticoHTMLCSS = new Course({
+  name: "Curso práctico de HTML y CSS",
+});
+const cursoBI = new Course({
+  name: "Intro a Data Business",
+});
+const cursoDataViz = new Course({
+  name: "Curso de Data Viz",
+});
+const cursoC = new Course({
+  name: "Intro a C++",
+});
+const cursoUnreal = new Course({
+  name: "Curso de Unreal Engine",
+});
+
+
+class LearningPath {
+  constructor({
+    name,
+    courses = [],
+  }){
+    this.name = name;
+    this.courses = courses;
+  }
+};
+
+const escuelaWeb = new LearningPath({
+  name: "Escuela de desarollo web",
+  courses: [
+    cursoProgBasica,
+    cursoDefHTMLCSS,
+    cursoPracticoHTMLCSS,
+  ]
+});
+
+const escuelaData = new LearningPath({
+  name: "Escuela de dataScients",
+  courses: [
+    cursoProgBasica,
+    cursoBI,
+    cursoDataViz,
+  ]
+});
+
+const escuelaVgs = new LearningPath({
+  name: "Escuela de Video games",
+  courses: [
+    cursoProgBasica,
+    cursoC,
+    cursoUnreal
+  ]
+});
+
+class Student{
+  constructor({
+      name,
+      age,
+      email,
+      username,
+      twitter = undefined, // asignandolo Undefinde decimos que es opcional
+      instagram = undefined,
+      facebook = undefined,
+      approvedCourses = [],
+      learningPaths = [],
+    }) {
+      this.name = name;
+      this.age = age;
+      this.email = email;
+      this.username = username;
+      this.socialMedia = {
+        twitter,
+        instagram,
+        facebook,
+      };
+      this.approvedCourses = approvedCourses;
+      this.learningPaths = learningPaths;
+    }
+};
+
+const jorge = new Student({
+    name: "Jorge",
+    age: 30,
+    email: "jorge@gmail.com",
+    username: "Jorge90",
+    twitter: "jorge9090",
+});
+
+const juan2 = new Student({
+  name: "JuanDC",
+  username: "juandc",
+  email: "juanito@juanito.com",
+  twitter: "fjuandc",
+  learningPaths: [
+    escuelaWeb,
+    escuelaVgs,
+  ],
+});
+
+const miguelito2 = new Student({
+  name: "Miguelito",
+  username: "migelitofeliz",
+  email: "miguelito@juanito.com",
+  instagram: "migelito_feliz",
+  learningPaths: [
+    escuelaWeb,
+    escuelaData,
+  ],
+});
