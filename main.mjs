@@ -1,8 +1,27 @@
-class Classes {
+function videoPlay(id){
+  const urlSecreta = "htps://platzi.com/ultra-secreta/" + id;
+  console.log("Se esta reproduciendo el video desde la Url: " + urlSecreta)
+}
+
+function videoStop(id){
+  const urlSecreta = "htps://platzi.com/ultra-secreta/" + id;
+  console.log("Se pauso el video desde la Url: " + urlSecreta)
+}
+
+export class PlatziClass {
   constructor({
     name,
+    videoID,
   }){
     this.name = name;
+    this.videoID = videoID;
+  }
+
+  reproducir(){
+    videoPlay(this.videoID);
+  }
+  pausar(){
+    videoStop(this.videoID);
   }
 }
 
@@ -12,11 +31,24 @@ class Course {
     classes = [],
     coments = [],
   }){
-    this.name = name;
+    this._name = name; // Le pedimos a los demás que no llamen a este atributo desde afuera de la clase e instancias
     this.classes = classes;
     this.coments = coments;
   }
+
+  get name(){
+    return this._name;
+  }
+
+  set name(nuevoNombre){
+    if(nuevoNombre === "Curso Malito de Prog Básica"){
+      console.error("Web... no")
+    } else {
+      this._name = nuevoNombre;
+    }
+  }
 }
+
 
 const cursoProgBasica = new Course({
   name: "Curso gratis de Programación Básica",
