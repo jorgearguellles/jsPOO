@@ -8,7 +8,7 @@ function videoStop(id){
   console.log("Se pauso el video desde la Url: " + urlSecreta)
 }
 
-export class PlatziClass {
+class PlatziClass {
   constructor({
     name,
     videoID,
@@ -30,10 +30,15 @@ class Course {
     name,
     classes = [],
     coments = [],
+    isFree = false,
+    lang = "spanish"
   }){
     this._name = name; // Le pedimos a los demás que no llamen a este atributo desde afuera de la clase e instancias
     this.classes = classes;
     this.coments = coments;
+    this.isFree = isFree;
+    this.lang = lang;
+
   }
 
   get name(){
@@ -52,12 +57,15 @@ class Course {
 
 const cursoProgBasica = new Course({
   name: "Curso gratis de Programación Básica",
+  isFree: "true",
+  lang: "spanish",
 });
 const cursoDefHTMLCSS = new Course({
   name: "Curso Definitivo de HTML & CSS",
 });
 const cursoPracticoHTMLCSS = new Course({
   name: "Curso práctico de HTML y CSS",
+  lang: "english",
 });
 const cursoBI = new Course({
   name: "Intro a Data Business",
@@ -110,6 +118,9 @@ const escuelaVgs = new LearningPath({
   ]
 });
 
+
+
+
 class Student{
   constructor({
       name,
@@ -136,7 +147,45 @@ class Student{
     }
 };
 
-const jorge = new Student({
+class FreeStudent extends Student {
+  constructor(props){
+    super(props)
+  }
+
+  approvedCourse(newCourse){
+    if(newCourse.isFree){
+      this.approvedCourses.push(newCourse);
+    } else {
+      console.warn("Lo sentimos " + this.name + ", solo puedes tomar cursos abiertos");
+    }
+  }
+}
+
+class BasicStudent extends Student {
+  constructor(props){
+    super(props)
+  }
+
+  approvedCourse(newCourse){
+    if(newCourse.lang !== "english"){
+      this.approvedCourses.push(newCourse);
+    } else {
+      console.warn("Lo sentimos " + this.name + ", no puedes tomar cursos en ingles");
+    }
+  }
+}
+
+class ExpertStudent extends Student {
+  constructor(props){
+    super(props)
+  }
+
+  approvedCourse(newCourse){
+    this.approvedCourses.push(newCourse);
+  }
+}
+
+const jorge1 = new FreeStudent({
     name: "Jorge",
     age: 30,
     email: "jorge@gmail.com",
@@ -144,7 +193,7 @@ const jorge = new Student({
     twitter: "jorge9090",
 });
 
-const juan2 = new Student({
+const juan1 = new BasicStudent({
   name: "JuanDC",
   username: "juandc",
   email: "juanito@juanito.com",
@@ -155,7 +204,7 @@ const juan2 = new Student({
   ],
 });
 
-const miguelito2 = new Student({
+const miguelito1 = new ExpertStudent({
   name: "Miguelito",
   username: "migelitofeliz",
   email: "miguelito@juanito.com",
