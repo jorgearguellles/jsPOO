@@ -1,3 +1,24 @@
+class Comment {
+  constructor({
+    content,
+    studentName,
+    studentRole = "estudiante",
+
+  }){
+    this.content = content;
+    this.studentName = studentName;
+    this.studentRole = studentRole;
+    this.likes = 0;
+  }
+
+  publicar(){
+    console.log( this.studentName + " (" +this.studentRole + ")" );
+    console.log( this.likes + " likes" );
+    console.log( this.content );
+  }
+}
+
+
 function videoPlay(id){
   const urlSecreta = "htps://platzi.com/ultra-secreta/" + id;
   console.log("Se esta reproduciendo el video desde la Url: " + urlSecreta)
@@ -145,6 +166,14 @@ class Student{
       this.approvedCourses = approvedCourses;
       this.learningPaths = learningPaths;
     }
+
+    publicarComentario(commentContent){
+      const comment = new Comment({
+        content: commentContent,
+        studentName: this.name,
+      });
+      comment.publicar();
+    }
 };
 
 class FreeStudent extends Student {
@@ -185,6 +214,25 @@ class ExpertStudent extends Student {
   }
 }
 
+class TeacherStudent extends Student {
+  constructor(props){
+    super(props)
+  }
+
+  approvedCourse(newCourse){
+    this.approvedCourses.push(newCourse);
+  }
+
+  publicarComentario(commentContent){
+    const comment = new Comment({
+      content: commentContent,
+      studentName: this.name,
+      studentRole: "profesor"
+    });
+    comment.publicar();
+  }
+}
+
 const jorge1 = new FreeStudent({
     name: "Jorge",
     age: 30,
@@ -213,4 +261,11 @@ const miguelito1 = new ExpertStudent({
     escuelaWeb,
     escuelaData,
   ],
+});
+
+const freddy1 = new TeacherStudent({
+  name: "freddy Vega",
+  username: "freddy",
+  email: "freddy@platzi.com",
+  twitter: "fredddy",
 });
